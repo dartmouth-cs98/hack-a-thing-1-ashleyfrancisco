@@ -1,7 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import * as React from 'react';
+// import React from 'react';
 import Styled from 'styled-components/native';
 import MapView, {Marker} from 'react-native-maps';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import GraphsScreen from './components/GraphScreen';
+import MapScreen from './components/MapScreen';
 import { StyleSheet, Text, View } from 'react-native';
 
 // export default function App() {
@@ -23,47 +28,28 @@ import { StyleSheet, Text, View } from 'react-native';
 //   },
 // });
 
-const Container = Styled.View`
-    flex: 1;
-`;
-// Test set location
-// const AppleMapLocation = () => {
-//   return (
-//     <Container>
-//       <MapView style={{flex: 1}}
-//         initialRegion={{
-//           latitude:39.952583,
-//           longitude:-75.165222,
-//           latitudeDelta: 0.04,
-//           longitudeDelta: 0.03
-//         }}
-//       />
 
-//     </Container>
-//   );
-// };
-
-const AddMarker = () => {
+function HomeScreen() {
   return (
-    <Container>
-      <MapView 
-        style={{flex: 1}}
-        initialRegion={{
-          latitude:39.952583,
-          longitude:-75.165222,
-          latitudeDelta: 0.04,
-          longitudeDelta: 0.03
-      }}>
-      <Marker
-      coordinate={{latitude:39.952583, longitude:-75.165222}}
-      title="Philly"
-      />
-      </MapView>
-    </Container>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Location Tracker through Graphs!</Text>
+    </View>
   );
-};
+}
 
-// test
 
-//export default AppleMapLocation;
-export default AddMarker;
+const Tab = createBottomTabNavigator();
+
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Graphs" component={GraphsScreen} />
+        <Tab.Screen name="Map" component={MapScreen}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
